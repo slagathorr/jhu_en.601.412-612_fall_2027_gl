@@ -110,12 +110,3 @@ Make sure you ran the export cell after the DELETE cells. DuckDB reads the expor
 
 **Windows: errors about `winutils.exe` or `HADOOP_HOME`**
 Spark on Windows needs Hadoop's `winutils.exe`. The simplest fix is to run the notebook in WSL2 (Ubuntu), which avoids the issue entirely.
-
-## Reusing this for Project 2
-
-Patterns in the notebook that carry over directly:
-
-- Write tables as Delta (or Iceberg) instead of a plain Parquet folder, so you get atomic commits, statistics, and history.
-- Cluster or Z-order on the columns you filter by most, and check the Spark UI to confirm files are actually being skipped.
-- When one stage runs far longer than the others, check Summary Metrics for skew before adding resources.
-- Use DuckDB for exploration and small queries over the same files, and save Spark for work that needs it.
